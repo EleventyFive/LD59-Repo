@@ -25,16 +25,6 @@ target_position = Vector2(24, 0)
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="Cast2" type="RayCast2D" parent="."]
-target_position = Vector2(24, -8)
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="Cast3" type="RayCast2D" parent="."]
-target_position = Vector2(24, 8)
-collide_with_areas = true
-collide_with_bodies = false
-
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("3_sgjle")
 

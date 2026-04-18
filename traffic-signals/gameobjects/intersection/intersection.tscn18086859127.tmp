@@ -19,13 +19,13 @@ title = "Controls"
 [node name="VBoxContainer" type="VBoxContainer" parent="FoldableContainer"]
 layout_mode = 2
 
-[node name="AddLightGroup" type="Button" parent="FoldableContainer/VBoxContainer"]
+[node name="LightGroupContainer" type="VBoxContainer" parent="FoldableContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AddLightGroup" type="Button" parent="FoldableContainer/VBoxContainer/LightGroupContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Add Light Group"
-
-[node name="LightGroupContainer" type="VBoxContainer" parent="FoldableContainer/VBoxContainer"]
-layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="FoldableContainer/VBoxContainer"]
 layout_mode = 2
@@ -36,4 +36,4 @@ layout_mode = 2
 columns = 2
 script = ExtResource("4_msm1n")
 
-[connection signal="pressed" from="FoldableContainer/VBoxContainer/AddLightGroup" to="." method="_on_add_light_group_pressed"]
+[connection signal="pressed" from="FoldableContainer/VBoxContainer/LightGroupContainer/AddLightGroup" to="." method="_on_add_light_group_pressed"]

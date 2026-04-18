@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://cecdxqu0y8pp3"]
+
+[ext_resource type="Script" uid="uid://wcjn5ysata1n" path="res://gameobjects/intersection/_intersection.gd" id="1_fi5dk"]
+[ext_resource type="Script" uid="uid://cos1ibe12d0h6" path="res://gameobjects/intersection/intersection_controls/_intersection_control.gd" id="2_s1bes"]
+[ext_resource type="Script" uid="uid://drdr7khwgjsa6" path="res://gameobjects/intersection/intersection_controls/_available_lights.gd" id="4_msm1n"]
+
+[node name="Intersection" type="Node2D"]
+script = ExtResource("1_fi5dk")
+
+[node name="Control" type="Control" parent="."]
+layout_direction = 1
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("2_s1bes")
+
+[node name="FoldableContainer" type="FoldableContainer" parent="Control"]
+layout_mode = 0
+offset_right = 328.0
+offset_bottom = 272.0
+scale = Vector2(0.6, 0.6)
+title = "Controls"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/FoldableContainer"]
+layout_mode = 2
+
+[node name="LightGroupContainer" type="VBoxContainer" parent="Control/FoldableContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AddLightGroup" type="Button" parent="Control/FoldableContainer/VBoxContainer/LightGroupContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Add Light Group"
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/FoldableContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AvailableLights" type="GridContainer" parent="Control/FoldableContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+columns = 2
+script = ExtResource("4_msm1n")
+
+[connection signal="pressed" from="Control/FoldableContainer/VBoxContainer/LightGroupContainer/AddLightGroup" to="Control" method="_on_add_light_group_pressed"]

@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://blenttcf84m6l"]
+
+[ext_resource type="Script" uid="uid://bblw85tweuwjh" path="res://gameobjects/intersection/intersection_controls/_light_group.gd" id="1_phhmb"]
+[ext_resource type="Script" uid="uid://dlv8tmvqgthwo" path="res://gameobjects/intersection/intersection_controls/_light_group_lights.gd" id="2_45do0"]
+
+[node name="LightGroup" type="VBoxContainer"]
+script = ExtResource("1_phhmb")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Lights" type="VBoxContainer" parent="HBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 5
+script = ExtResource("2_45do0")
+
+[node name="SpinBox" type="SpinBox" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 10.0
+rounded = true
+alignment = 1
+
+[node name="DeleteButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Delete Group
+"
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="value_changed" from="HBoxContainer/SpinBox" to="." method="_on_spin_box_value_changed"]
+[connection signal="pressed" from="HBoxContainer/DeleteButton" to="." method="_on_delete_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
