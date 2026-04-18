@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://bet3n02dpqqbq"]
+
+[ext_resource type="Texture2D" uid="uid://ctaoylqqccv1g" path="res://gameobjects/vehicles/car_1_sprite.png" id="1_tfp05"]
+[ext_resource type="Script" uid="uid://bnbpbjp0kovh6" path="res://gameobjects/vehicles/_vehicle.gd" id="1_tus70"]
+[ext_resource type="Script" uid="uid://btsh504utox1i" path="res://gameobjects/vehicles/VehicleArea.gd" id="3_sgjle"]
+
+[sub_resource type="Curve2D" id="Curve2D_sgjle"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tus70"]
+size = Vector2(16, 8)
+
+[node name="Vehicle" type="Node2D"]
+script = ExtResource("1_tus70")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_tfp05")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_sgjle")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+
+[node name="Cast" type="RayCast2D" parent="."]
+target_position = Vector2(24, 0)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Cast2" type="RayCast2D" parent="."]
+target_position = Vector2(24, -8)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Cast3" type="RayCast2D" parent="."]
+target_position = Vector2(24, 8)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("3_sgjle")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_tus70")
