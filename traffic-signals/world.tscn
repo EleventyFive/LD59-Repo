@@ -153,38 +153,42 @@ curve = SubResource("Curve2D_ic0uy")
 visible = false
 curve = SubResource("Curve2D_k3n1d")
 
-[node name="SouthLight" parent="." instance=ExtResource("6_dwbse")]
+[node name="SouthLight" parent="." node_paths=PackedStringArray("area") instance=ExtResource("6_dwbse")]
 position = Vector2(304, 200)
+area = NodePath("SIArea")
 
-[node name="EastLight" parent="." instance=ExtResource("6_dwbse")]
+[node name="SIArea" parent="SouthLight" instance=ExtResource("6_pkg7o")]
+position = Vector2(-8, -56)
+
+[node name="EastLight" parent="." node_paths=PackedStringArray("area") instance=ExtResource("6_dwbse")]
 position = Vector2(328, 176)
+area = NodePath("EIArea")
 
-[node name="NorthLight" parent="." instance=ExtResource("6_dwbse")]
+[node name="EIArea" parent="EastLight" instance=ExtResource("6_pkg7o")]
+position = Vector2(-56, 8)
+
+[node name="NorthLight" parent="." node_paths=PackedStringArray("area") instance=ExtResource("6_dwbse")]
 position = Vector2(304, 144)
+area = NodePath("NIArea")
 
-[node name="WestLight" parent="." instance=ExtResource("6_dwbse")]
+[node name="NIArea" parent="NorthLight" instance=ExtResource("6_pkg7o")]
+position = Vector2(8, 64)
+
+[node name="WestLight" parent="." node_paths=PackedStringArray("area") instance=ExtResource("6_dwbse")]
 position = Vector2(280, 176)
+area = NodePath("WIArea")
 
-[node name="NIArea" parent="." instance=ExtResource("6_pkg7o")]
-position = Vector2(312, 208)
-
-[node name="EIArea" parent="." instance=ExtResource("6_pkg7o")]
-position = Vector2(272, 184)
-
-[node name="SIArea" parent="." instance=ExtResource("6_pkg7o")]
-position = Vector2(296, 144)
-
-[node name="WIArea" parent="." instance=ExtResource("6_pkg7o")]
-position = Vector2(336, 168)
+[node name="WIArea" parent="WestLight" instance=ExtResource("6_pkg7o")]
+position = Vector2(56, -8)
 
 [node name="IntersectionController" parent="." node_paths=PackedStringArray("lights") instance=ExtResource("4_036b0")]
 offset_left = 328.0
-offset_top = 128.0
+offset_top = -8.0
 offset_right = 328.0
-offset_bottom = 128.0
+offset_bottom = -8.0
 lights = {
-NodePath("../NorthLight"): NodePath("../NIArea"),
-NodePath("../EastLight"): NodePath("../EIArea"),
-NodePath("../SouthLight"): NodePath("../SIArea"),
-NodePath("../WestLight"): NodePath("../WIArea")
+NodePath("../NorthLight"): NodePath("../NorthLight/NIArea"),
+NodePath("../EastLight"): NodePath("../EastLight/EIArea"),
+NodePath("../SouthLight"): NodePath("../SouthLight/SIArea"),
+NodePath("../WestLight"): NodePath("../WestLight/WIArea")
 }

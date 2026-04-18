@@ -27,23 +27,15 @@ func _physics_process(delta: float) -> void:
 	
 	if cast.is_colliding():
 		var object = cast.get_collider()
-		if object is VehicleArea:
-			move_speed = lerpf(move_speed, 0, acceleration * 2)
-			#var distance = global_position.distance_to(object.global_position)
-			#var multiplier = distance/cast.target_position.x
-			#move_speed = minf(max_speed, move_speed * multiplier)
-		elif object is IntersectionArea:
+
+		if object is IntersectionArea:
 			if object.go:
 				move_speed = lerpf(move_speed, max_speed, acceleration)
 			else:
 				move_speed = lerpf(move_speed, 0, acceleration)
-				#var distance = global_position.distance_to(object.global_position)
-				#var multiplier = distance/cast.target_position.x
-				#move_speed = minf(max_speed, move_speed * multiplier)
 
-				
 	else:
-		move_speed = max_speed
+		move_speed = lerpf(move_speed, max_speed, acceleration)
 		
 	if path_follow.progress_ratio >= 0.99:
 		queue_free()

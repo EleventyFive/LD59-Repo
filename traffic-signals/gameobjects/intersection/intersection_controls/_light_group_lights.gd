@@ -23,3 +23,21 @@ func get_container_index() -> int:
 	var index_position = mouse_height/height
 	var new_index = roundi(index_position * items)
 	return new_index
+
+func get_lights():
+	
+	var labels = get_children()
+	if labels.is_empty():
+		return
+	
+	var lights : Array[Light]
+	for label in labels:
+		lights.append(label.light_data)
+	
+	return lights
+		
+func has_lights():
+	return get_child_count()
+	
+		
+	

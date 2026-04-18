@@ -36,4 +36,8 @@ layout_mode = 2
 columns = 2
 script = ExtResource("4_msm1n")
 
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="pressed" from="FoldableContainer/VBoxContainer/AddLightGroup" to="." method="_on_add_light_group_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

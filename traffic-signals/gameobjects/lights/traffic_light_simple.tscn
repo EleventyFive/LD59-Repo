@@ -10,5 +10,3 @@ script = ExtResource("1_16pov")
 texture = ExtResource("2_wghy2")
 hframes = 4
 frame = 3
-
-[node name="Timer" type="Timer" parent="."]
