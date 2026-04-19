@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cecdxqu0y8pp3"]
+[gd_scene load_steps=4 format=3 uid="uid://cecdxqu0y8pp3"]
 
 [ext_resource type="Script" uid="uid://cos1ibe12d0h6" path="res://gameobjects/intersection/intersection_controls/_intersection_control.gd" id="2_s1bes"]
+[ext_resource type="FontFile" uid="uid://w7ikvwo103m2" path="res://ui/tinypixel.ttf" id="2_yxroh"]
 [ext_resource type="Script" uid="uid://drdr7khwgjsa6" path="res://gameobjects/intersection/intersection_controls/_available_lights.gd" id="4_msm1n"]
 
 [node name="Control" type="Control"]
@@ -11,21 +12,33 @@ script = ExtResource("2_s1bes")
 
 [node name="FoldableContainer" type="FoldableContainer" parent="."]
 layout_mode = 0
-offset_right = 328.0
-offset_bottom = 272.0
-scale = Vector2(0.6, 0.6)
+offset_right = 168.0
+offset_bottom = 136.0
+theme_override_fonts/font = ExtResource("2_yxroh")
+theme_override_font_sizes/font_size = 10
 title = "Controls"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="FoldableContainer"]
 layout_mode = 2
 
 [node name="AddLightGroup" type="Button" parent="FoldableContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Add Light Group"
+theme_override_colors/font_outline_color = Color(0.83137256, 0.25882354, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_yxroh")
+theme_override_font_sizes/font_size = 5
+text = "Add New Light Group"
 
 [node name="LightGroupContainer" type="VBoxContainer" parent="FoldableContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="AvailableLightsLabel" type="Label" parent="FoldableContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_yxroh")
+theme_override_font_sizes/font_size = 5
+text = "Available_Lights"
 
 [node name="PanelContainer" type="PanelContainer" parent="FoldableContainer/VBoxContainer"]
 layout_mode = 2

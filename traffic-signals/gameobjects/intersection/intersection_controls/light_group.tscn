@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://blenttcf84m6l"]
+[gd_scene load_steps=5 format=3 uid="uid://blenttcf84m6l"]
 
 [ext_resource type="Script" uid="uid://bblw85tweuwjh" path="res://gameobjects/intersection/intersection_controls/_light_group.gd" id="1_phhmb"]
 [ext_resource type="Script" uid="uid://dlv8tmvqgthwo" path="res://gameobjects/intersection/intersection_controls/_light_group_lights.gd" id="2_45do0"]
+[ext_resource type="FontFile" uid="uid://w7ikvwo103m2" path="res://ui/tinypixel.ttf" id="3_xprev"]
+
+[sub_resource type="Theme" id="Theme_07k37"]
+default_font = ExtResource("3_xprev")
+default_font_size = 10
 
 [node name="LightGroup" type="VBoxContainer"]
 script = ExtResource("1_phhmb")
@@ -11,7 +16,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(100, 50)
+custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -24,6 +29,7 @@ script = ExtResource("2_45do0")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme = SubResource("Theme_07k37")
 max_value = 10.0
 rounded = true
 alignment = 1
@@ -31,6 +37,9 @@ alignment = 1
 [node name="DeleteButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 0.18039216, 0, 1)
+theme_override_fonts/font = ExtResource("3_xprev")
+theme_override_font_sizes/font_size = 5
 text = "Delete Group
 "
 

@@ -1,12 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8ti3tgv5m4em"]
+[gd_scene load_steps=4 format=3 uid="uid://c8ti3tgv5m4em"]
 
 [ext_resource type="Script" uid="uid://0ogvua2dot07" path="res://gameobjects/intersection/intersection_controls/_light_label.gd" id="1_4mihg"]
+[ext_resource type="FontFile" uid="uid://w7ikvwo103m2" path="res://ui/tinypixel.ttf" id="1_twqex"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o7pqn"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.43529412, 1)
+border_blend = true
 
 [node name="LightLabel" type="Label"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 33.0
+offset_bottom = 23.0
 mouse_filter = 1
+theme_override_fonts/font = ExtResource("1_twqex")
+theme_override_font_sizes/font_size = 5
+theme_override_styles/normal = SubResource("StyleBoxFlat_o7pqn")
+text = "Light"
+horizontal_alignment = 1
+vertical_alignment = 1
 script = ExtResource("1_4mihg")

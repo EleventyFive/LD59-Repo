@@ -156,6 +156,7 @@ curve = SubResource("Curve2D_k3n1d")
 [node name="SouthLight" parent="." node_paths=PackedStringArray("area") instance=ExtResource("6_dwbse")]
 position = Vector2(304, 200)
 area = NodePath("SIArea")
+light_name = "South Light"
 
 [node name="SIArea" parent="SouthLight" instance=ExtResource("6_pkg7o")]
 position = Vector2(-8, -56)
@@ -163,6 +164,7 @@ position = Vector2(-8, -56)
 [node name="EastLight" parent="." node_paths=PackedStringArray("area") instance=ExtResource("6_dwbse")]
 position = Vector2(328, 176)
 area = NodePath("EIArea")
+light_name = "East Light"
 
 [node name="EIArea" parent="EastLight" instance=ExtResource("6_pkg7o")]
 position = Vector2(-56, 8)
@@ -170,6 +172,7 @@ position = Vector2(-56, 8)
 [node name="NorthLight" parent="." node_paths=PackedStringArray("area") instance=ExtResource("6_dwbse")]
 position = Vector2(304, 144)
 area = NodePath("NIArea")
+light_name = "North Light"
 
 [node name="NIArea" parent="NorthLight" instance=ExtResource("6_pkg7o")]
 position = Vector2(8, 64)
@@ -177,15 +180,14 @@ position = Vector2(8, 64)
 [node name="WestLight" parent="." node_paths=PackedStringArray("area") instance=ExtResource("6_dwbse")]
 position = Vector2(280, 176)
 area = NodePath("WIArea")
+light_name = "West Light"
 
 [node name="WIArea" parent="WestLight" instance=ExtResource("6_pkg7o")]
 position = Vector2(56, -8)
 
 [node name="IntersectionController" parent="." node_paths=PackedStringArray("lights") instance=ExtResource("4_036b0")]
-offset_left = 328.0
-offset_top = -8.0
-offset_right = 328.0
-offset_bottom = -8.0
+offset_left = 320.0
+offset_right = 320.0
 lights = {
 NodePath("../NorthLight"): NodePath("../NorthLight/NIArea"),
 NodePath("../EastLight"): NodePath("../EastLight/EIArea"),

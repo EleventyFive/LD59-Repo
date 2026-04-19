@@ -18,8 +18,8 @@ func reset_lights(lights : Array):
 	if not lights.is_empty():
 		for light in lights:
 			var new_label = light_label.instantiate()
-			new_label.text = light.text
-			new_label.light_data = light.light_data
+			new_label.text = light.light_name
+			new_label.light_data = light
 			add_child(new_label)
 
 			

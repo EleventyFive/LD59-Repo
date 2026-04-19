@@ -2,6 +2,7 @@ extends VBoxContainer
 class_name  LightGroup
 
 signal lights_red
+signal light_group_deleted
 
 @onready var spin_box: SpinBox = $HBoxContainer/SpinBox
 @onready var group_lights : VBoxContainer = $HBoxContainer/PanelContainer/GroupLights
@@ -48,8 +49,14 @@ func turn_red():
 		current_state = state.red
 
 func _on_delete_button_pressed() -> void:
-	available_lights.reset_lights(group_lights.get_lights())
+	var lights = group_lights.get_lights()
+	for light in lights:
+		light.change_light("red")
+	timer.stop()	
+	available_lights.reset_lights(lights)
+	light_group_deleted.emit(self)
 	queue_free()
+
 
 func _on_spin_box_value_changed(value: float) -> void:
 	on_time = int(value)

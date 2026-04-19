@@ -3,7 +3,7 @@ class_name Light
 
 @export_enum("green", "yellow", "red") var start_state : String = "red"
 @export var area : Area2D
-
+@export var light_name : String
 @onready var sprite: Sprite2D = $Sprite2D
 
 
