@@ -2,7 +2,8 @@ extends Node2D
 class_name	Level
 
 @export var pass_time : float = 4
-@onready var pass_time_label: Label = $CanvasLayer/Control/Timers/VBoxContainer/Panel2/HBoxContainer/PassTime
+@export var level_id : int = 0
+@onready var pass_time_label: Label = $CanvasLayer/Control/PanelContainer2/Timers/VBoxContainer/Panel2/HBoxContainer/PassTime
 
 func _ready() -> void:
 	pass_time_label.text = "%0.2f" % pass_time

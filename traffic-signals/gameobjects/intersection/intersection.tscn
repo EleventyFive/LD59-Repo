@@ -1,44 +1,46 @@
-[gd_scene load_steps=6 format=3 uid="uid://cecdxqu0y8pp3"]
+[gd_scene load_steps=4 format=3 uid="uid://cecdxqu0y8pp3"]
 
 [ext_resource type="Script" uid="uid://cos1ibe12d0h6" path="res://gameobjects/intersection/intersection_controls/_intersection_control.gd" id="2_s1bes"]
 [ext_resource type="FontFile" uid="uid://w7ikvwo103m2" path="res://ui/tinypixel.ttf" id="2_yxroh"]
-[ext_resource type="Script" uid="uid://bn45u7tym270w" path="res://gameobjects/intersection/intersection_controls/_control_foldable.gd" id="3_msm1n"]
 [ext_resource type="Script" uid="uid://drdr7khwgjsa6" path="res://gameobjects/intersection/intersection_controls/_available_lights.gd" id="4_msm1n"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_msm1n"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-
 [node name="Control" type="Control"]
-layout_direction = 1
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2_s1bes")
 
-[node name="FoldableContainer" type="FoldableContainer" parent="."]
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -99.0
-offset_right = 101.0
-offset_bottom = 192.0
+offset_left = -92.0
+offset_right = 92.0
+offset_bottom = 173.0
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_yxroh")
-theme_override_font_sizes/font_size = 10
-theme_override_styles/panel = SubResource("StyleBoxEmpty_msm1n")
-title = "Intersection Controls"
-script = ExtResource("3_msm1n")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="FoldableContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 
-[node name="AddLightGroup" type="Button" parent="FoldableContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_yxroh")
+theme_override_font_sizes/font_size = 10
+text = "
+IntersectionControls"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AddLightGroup" type="Button" parent="PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -49,41 +51,39 @@ theme_override_font_sizes/font_size = 8
 text = "Click Here 
 To Add New Light Group"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="FoldableContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="LightGroupLabel" type="Label" parent="FoldableContainer/VBoxContainer/HBoxContainer"]
+[node name="LightGroupLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_yxroh")
 theme_override_font_sizes/font_size = 8
 text = "LightGroups"
 
-[node name="Time" type="Label" parent="FoldableContainer/VBoxContainer/HBoxContainer"]
+[node name="Time" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_yxroh")
 theme_override_font_sizes/font_size = 8
 text = "             Light time On"
 
-[node name="LightGroupContainer" type="VBoxContainer" parent="FoldableContainer/VBoxContainer"]
+[node name="LightGroupContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 93)
 layout_mode = 2
 
-[node name="AvailableLightsLabel" type="Label" parent="FoldableContainer/VBoxContainer"]
+[node name="AvailableLightsLabel" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_yxroh")
 theme_override_font_sizes/font_size = 8
 text = "Available_Lights"
 
-[node name="PanelContainer" type="PanelContainer" parent="FoldableContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="AvailableLights" type="GridContainer" parent="FoldableContainer/VBoxContainer/PanelContainer"]
+[node name="AvailableLights" type="GridContainer" parent="PanelContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
 columns = 2
 script = ExtResource("4_msm1n")
 
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="pressed" from="FoldableContainer/VBoxContainer/AddLightGroup" to="." method="_on_add_light_group_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/AddLightGroup" to="." method="_on_add_light_group_pressed"]

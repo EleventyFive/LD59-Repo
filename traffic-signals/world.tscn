@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://cb77wi4d0shj0"]
+[gd_scene load_steps=39 format=4 uid="uid://cb77wi4d0shj0"]
 
 [ext_resource type="Script" uid="uid://b85ag4negq4u6" path="res://world.gd" id="1_70uel"]
 [ext_resource type="Texture2D" uid="uid://mkroi7513t6e" path="res://gameobjects/roads.png" id="1_f3sb7"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://cecdxqu0y8pp3" path="res://gameobjects/intersection/intersection.tscn" id="4_036b0"]
 [ext_resource type="PackedScene" uid="uid://jsw8gnjd53xb" path="res://gameobjects/lights/traffic_light_simple.tscn" id="6_dwbse"]
 [ext_resource type="PackedScene" uid="uid://bxftqld8itw7l" path="res://gameobjects/intersection/intersection_area.tscn" id="6_pkg7o"]
+[ext_resource type="Script" uid="uid://ckea7dhkc250t" path="res://music_player.gd" id="7_26xuy"]
 [ext_resource type="PackedScene" uid="uid://bl1yj064g42ju" path="res://gameobjects/fail_line.tscn" id="9_ioo17"]
 [ext_resource type="Script" uid="uid://bldofcjwvurw1" path="res://pause.gd" id="10_udxuc"]
 
@@ -25,6 +26,9 @@ streams_count = 3
 stream_0/stream = ExtResource("2_cbp6q")
 stream_1/stream = ExtResource("2_udxuc")
 stream_2/stream = ExtResource("4_26xuy")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wse8f"]
+bg_color = Color(0.24840015, 0.24840018, 0.24840012, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gbfbk"]
 bg_color = Color(0, 0, 0, 0.60784316)
@@ -55,9 +59,6 @@ expand_margin_left = 3.0
 expand_margin_top = 3.0
 expand_margin_right = 3.0
 expand_margin_bottom = 3.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wse8f"]
-bg_color = Color(0.24840015, 0.24840018, 0.24840012, 1)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fj7yv"]
 texture = ExtResource("1_f3sb7")
@@ -156,13 +157,16 @@ stream = SubResource("AudioStreamRandomizer_bc84e")
 volume_db = 3.88
 script = ExtResource("2_2u3nc")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
 stream = ExtResource("2_hiqwa")
 autoplay = true
+bus = &"Music"
+script = ExtResource("7_26xuy")
 
 [node name="Level1" type="Node2D" parent="."]
 script = ExtResource("1_ic0uy")
+level_id = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Level1"]
 
@@ -175,33 +179,41 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Timers" type="PanelContainer" parent="Level1/CanvasLayer/Control"]
+[node name="PanelContainer2" type="PanelContainer" parent="Level1/CanvasLayer/Control"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -56.0
-offset_right = 112.0
-offset_bottom = 56.0
-grow_horizontal = 2
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -392.0
+offset_top = -180.0
+offset_right = -220.0
+offset_bottom = -108.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wse8f")
+
+[node name="Timers" type="PanelContainer" parent="Level1/CanvasLayer/Control/PanelContainer2"]
+layout_mode = 2
 script = ExtResource("2_k3n1d")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Level1/CanvasLayer/Control/Timers"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Level1/CanvasLayer/Control/PanelContainer2/Timers"]
 layout_mode = 2
 alignment = 1
 
-[node name="Panel2" type="Panel" parent="Level1/CanvasLayer/Control/Timers/VBoxContainer"]
+[node name="Panel2" type="Panel" parent="Level1/CanvasLayer/Control/PanelContainer2/Timers/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Level1/CanvasLayer/Control/Timers/VBoxContainer/Panel2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Level1/CanvasLayer/Control/PanelContainer2/Timers/VBoxContainer/Panel2"]
 layout_mode = 0
 offset_right = 152.0
 offset_bottom = 24.0
 alignment = 1
 
-[node name="PassTime" type="Label" parent="Level1/CanvasLayer/Control/Timers/VBoxContainer/Panel2/HBoxContainer"]
+[node name="PassTime" type="Label" parent="Level1/CanvasLayer/Control/PanelContainer2/Timers/VBoxContainer/Panel2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 1
@@ -211,7 +223,7 @@ text = "0.5 "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="Level1/CanvasLayer/Control/Timers/VBoxContainer/Panel2/HBoxContainer"]
+[node name="Label2" type="Label" parent="Level1/CanvasLayer/Control/PanelContainer2/Timers/VBoxContainer/Panel2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 1
@@ -221,18 +233,18 @@ text = " Pass Time          "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Panel" type="Panel" parent="Level1/CanvasLayer/Control/Timers/VBoxContainer"]
+[node name="Panel" type="Panel" parent="Level1/CanvasLayer/Control/PanelContainer2/Timers/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Level1/CanvasLayer/Control/Timers/VBoxContainer/Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Level1/CanvasLayer/Control/PanelContainer2/Timers/VBoxContainer/Panel"]
 layout_mode = 0
 offset_right = 152.0
 offset_bottom = 26.0
 alignment = 1
 
-[node name="AvgTime" type="Label" parent="Level1/CanvasLayer/Control/Timers/VBoxContainer/Panel/HBoxContainer"]
+[node name="AvgTime" type="Label" parent="Level1/CanvasLayer/Control/PanelContainer2/Timers/VBoxContainer/Panel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 1
@@ -243,7 +255,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_wse8f")
 
-[node name="Label2" type="Label" parent="Level1/CanvasLayer/Control/Timers/VBoxContainer/Panel/HBoxContainer"]
+[node name="Label2" type="Label" parent="Level1/CanvasLayer/Control/PanelContainer2/Timers/VBoxContainer/Panel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 1
@@ -253,7 +265,7 @@ text = "Avg Wait Time"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Timer" type="Timer" parent="Level1/CanvasLayer/Control/Timers"]
+[node name="Timer" type="Timer" parent="Level1/CanvasLayer/Control/PanelContainer2/Timers"]
 one_shot = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Level1/CanvasLayer/Control"]
@@ -275,6 +287,12 @@ theme_override_fonts/font = ExtResource("1_gbfbk")
 theme_override_font_sizes/font_size = 10
 text = "Pause"
 script = ExtResource("10_udxuc")
+
+[node name="MuteMusic" type="CheckButton" parent="Level1/CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_gbfbk")
+theme_override_font_sizes/font_size = 10
+text = "Mute Music"
 
 [node name="LevelFailed" type="PanelContainer" parent="Level1/CanvasLayer/Control"]
 visible = false
@@ -330,7 +348,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_ioo17")
 text = "Restart Level"
 
 [node name="PanelContainer" type="PanelContainer" parent="Level1/CanvasLayer/Control"]
-custom_minimum_size = Vector2(220, 360)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -344,14 +361,40 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wse8f")
 
-[node name="IntersectionController" parent="Level1/CanvasLayer/Control/PanelContainer" node_paths=PackedStringArray("lights") instance=ExtResource("4_036b0")]
+[node name="HBoxContainer" type="VBoxContainer" parent="Level1/CanvasLayer/Control/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="IntersectionController" parent="Level1/CanvasLayer/Control/PanelContainer/HBoxContainer" node_paths=PackedStringArray("lights") instance=ExtResource("4_036b0")]
 layout_mode = 2
 lights = {
-NodePath("../../../../NorthLight"): NodePath("../../../../NorthLight/NIArea"),
-NodePath("../../../../EastLight"): NodePath("../../../../EastLight/EIArea"),
-NodePath("../../../../SouthLight"): NodePath("../../../../SouthLight/SIArea"),
-NodePath("../../../../WestLight"): NodePath("../../../../WestLight/WIArea")
+NodePath("../../../../../NorthLight"): NodePath("../../../../../NorthLight/NIArea"),
+NodePath("../../../../../EastLight"): NodePath("../../../../../EastLight/EIArea"),
+NodePath("../../../../../SouthLight"): NodePath("../../../../../SouthLight/SIArea"),
+NodePath("../../../../../WestLight"): NodePath("../../../../../WestLight/WIArea")
 }
+
+[node name="FoldableContainer" type="FoldableContainer" parent="Level1/CanvasLayer/Control/PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_gbfbk")
+theme_override_font_sizes/font_size = 10
+title = "Instructions"
+
+[node name="Label2" type="Label" parent="Level1/CanvasLayer/Control/PanelContainer/HBoxContainer/FoldableContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_gbfbk")
+theme_override_font_sizes/font_size = 5
+text = "  -There is a pause button top left if you are 
+	   reading this :)
+
+  -Drag the LIGHTS into the LIGHT GROUP to
+    control the traffic Lights.
+ 
+  - Win by getting your avg wait time below 
+	    the pass time.
+
+   -Traffic backing up too much is game over!
+"
 
 [node name="Roadway" type="TileMapLayer" parent="Level1"]
 z_index = -10
@@ -468,9 +511,10 @@ position = Vector2(432, 176)
 [node name="FailLine4" parent="Level1" instance=ExtResource("9_ioo17")]
 position = Vector2(208, 376)
 
-[connection signal="game_won" from="Level1/CanvasLayer/Control/Timers" to="Level1" method="_on_game_won"]
-[connection signal="check_time" from="Level1/CanvasLayer/Control/Timers/VBoxContainer/Panel/HBoxContainer/AvgTime" to="Level1/CanvasLayer/Control/Timers" method="_on_check_time"]
-[connection signal="timeout" from="Level1/CanvasLayer/Control/Timers/Timer" to="Level1/CanvasLayer/Control/Timers" method="_on_timer_timeout"]
+[connection signal="game_won" from="Level1/CanvasLayer/Control/PanelContainer2/Timers" to="Level1" method="_on_game_won"]
+[connection signal="check_time" from="Level1/CanvasLayer/Control/PanelContainer2/Timers/VBoxContainer/Panel/HBoxContainer/AvgTime" to="Level1/CanvasLayer/Control/PanelContainer2/Timers" method="_on_check_time"]
+[connection signal="timeout" from="Level1/CanvasLayer/Control/PanelContainer2/Timers/Timer" to="Level1/CanvasLayer/Control/PanelContainer2/Timers" method="_on_timer_timeout"]
 [connection signal="pressed" from="Level1/CanvasLayer/Control/VBoxContainer/ResetLevel" to="." method="_on_reset_level_pressed"]
 [connection signal="toggled" from="Level1/CanvasLayer/Control/VBoxContainer/Pause" to="Level1" method="_on_pause_toggled"]
+[connection signal="toggled" from="Level1/CanvasLayer/Control/VBoxContainer/MuteMusic" to="Music" method="_on_mute_music_toggled"]
 [connection signal="pressed" from="Level1/CanvasLayer/Control/LevelFailed/Vbox/Panel/Button" to="." method="_on_reset_level_pressed"]
