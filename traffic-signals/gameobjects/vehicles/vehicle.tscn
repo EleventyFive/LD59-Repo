@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bet3n02dpqqbq"]
 
-[ext_resource type="Texture2D" uid="uid://ctaoylqqccv1g" path="res://gameobjects/vehicles/car_1_sprite.png" id="1_tfp05"]
 [ext_resource type="Script" uid="uid://bnbpbjp0kovh6" path="res://gameobjects/vehicles/_vehicle.gd" id="1_tus70"]
+[ext_resource type="Texture2D" uid="uid://c4jktq0g1y6x0" path="res://gameobjects/vehicles/cars.png" id="2_pcis8"]
 [ext_resource type="Script" uid="uid://btsh504utox1i" path="res://gameobjects/vehicles/VehicleArea.gd" id="3_sgjle"]
 
 [sub_resource type="Curve2D" id="Curve2D_sgjle"]
@@ -13,7 +13,8 @@ size = Vector2(16, 8)
 script = ExtResource("1_tus70")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_tfp05")
+texture = ExtResource("2_pcis8")
+hframes = 5
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_sgjle")

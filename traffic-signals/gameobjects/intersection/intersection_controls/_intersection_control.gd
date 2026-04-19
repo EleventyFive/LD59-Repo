@@ -30,7 +30,6 @@ func _start_light_cycle():
 	else:
 		timer.start(2)
 	
-	print(is_running)
 		
 func next_light():
 	is_running = false
@@ -44,7 +43,6 @@ func next_light():
 	else:
 		light_index = 0
 		_start_light_cycle()
-	print(is_running)
 
 func _set_available_lights() -> void:
 	for light in lights:
@@ -66,13 +64,6 @@ func light_group_removed(deleted_group : LightGroup) -> void:
 	if light_groups.is_empty():
 		is_running = false
 	_start_light_cycle()
-
-		
-
-	
-		
-	
-	
 
 func _on_timer_timeout() -> void:
 	_start_light_cycle()

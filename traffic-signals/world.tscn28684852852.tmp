@@ -1,0 +1,464 @@
+[gd_scene load_steps=34 format=4 uid="uid://cb77wi4d0shj0"]
+
+[ext_resource type="Script" uid="uid://b85ag4negq4u6" path="res://world.gd" id="1_70uel"]
+[ext_resource type="Texture2D" uid="uid://mkroi7513t6e" path="res://gameobjects/roads.png" id="1_f3sb7"]
+[ext_resource type="FontFile" uid="uid://w7ikvwo103m2" path="res://ui/tinypixel.ttf" id="1_gbfbk"]
+[ext_resource type="Script" uid="uid://btaprlqm8vbd" path="res://_level.gd" id="1_ic0uy"]
+[ext_resource type="Script" uid="uid://cnjxjwity7o86" path="res://_sound_effects.gd" id="2_2u3nc"]
+[ext_resource type="PackedScene" uid="uid://c4e3oaooqtyu2" path="res://gameobjects/spawner.tscn" id="2_fj7yv"]
+[ext_resource type="AudioStream" uid="uid://creyom6lnf1gb" path="res://sounds/Ld-59.wav" id="2_hiqwa"]
+[ext_resource type="Script" uid="uid://d1ckyqbe70x5" path="res://ui/_reset_level.gd" id="2_ioo17"]
+[ext_resource type="Script" uid="uid://c23xhf3pwpllr" path="res://time_manager.gd" id="2_k3n1d"]
+[ext_resource type="AudioStream" uid="uid://dt0nijwxh1418" path="res://sounds/Blip2.wav" id="2_udxuc"]
+[ext_resource type="Script" uid="uid://ds1nhgdyf2m2l" path="res://wait_time_label.gd" id="2_wse8f"]
+[ext_resource type="Script" uid="uid://bugtwgqi5cqpv" path="res://_level_failed_menu.gd" id="3_gbfbk"]
+[ext_resource type="PackedScene" uid="uid://cecdxqu0y8pp3" path="res://gameobjects/intersection/intersection.tscn" id="4_036b0"]
+[ext_resource type="PackedScene" uid="uid://jsw8gnjd53xb" path="res://gameobjects/lights/traffic_light_simple.tscn" id="6_dwbse"]
+[ext_resource type="PackedScene" uid="uid://bxftqld8itw7l" path="res://gameobjects/intersection/intersection_area.tscn" id="6_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://bl1yj064g42ju" path="res://gameobjects/fail_line.tscn" id="9_ioo17"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gbfbk"]
+bg_color = Color(0, 0, 0, 0.60784316)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.41598046, 0.41598043, 0.4159804, 1)
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ioo17"]
+bg_color = Color(0.24313726, 0.24313726, 0.24313726, 0.6156863)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wse8f"]
+bg_color = Color(0.24840015, 0.24840018, 0.24840012, 1)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fj7yv"]
+texture = ExtResource("1_f3sb7")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_tlwt5"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_fj7yv")
+
+[sub_resource type="Curve2D" id="Curve2D_tlwt5"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -32, 184, 0, 0, 0, 0, 448, 184)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_aqk2v"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -32, 184, 0, 0, 0, 0, 160, 184, 0, 0, 0, 0, 184, 184, 0, 0, 0, 0, 200, 168, 0, 0, 0, 0, 208, 160, 0, 0, 0, 0, 216, 152, 0, 0, 0, 0, 216, -32)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_2o6r5"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -32, 184, 0, 0, 0, 0, 152, 184, 0, 0, 0, 0, 192, 184, 0, 0, 0, 0, 200, 192, 0, 0, 0.83286124, -3.3341851, 200, 384)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_fj7yv"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 312, 384, 0, 0, 0, 0, 312, -32)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_dwbse"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 312, 384, 0, 0, 0, 0, 312, 200, 0, 0, 0, 0, 304, 192, 0, 0, 0, 0, 288, 176, 0, 0, 0, 0, 280, 168, 0, 0, 0, 0, 64, 168)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_036b0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 312, 384, 0, 0, 0, 0, 312, 192, 0, 0, 0, 0, 312, 192, 0, 0, 0, 0, 320, 184, 0, 0, 0, 0, 544, 184)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_gbfbk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 448, 168, 0, 0, 0, 0, -32, 168)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_pkg7o"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 544, 168, 0, 0, 0, 0, 336, 168, 0, 0, 0, 0, 320, 176, 0, 0, 0, 0, 296, 192, 0, 0, 0, 0, 296, 200, 0, 0, 0, 0, 296, 384)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_ioo17"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 544, 168, 0, 0, 0, 0, 320, 168, 0, 0, 0, 0, 312, 160, 0, 0, 0, 0, 312, -32)
+}
+point_count = 4
+
+[sub_resource type="Curve2D" id="Curve2D_wse8f"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 296, -32, 0, 0, 0, 0, 296, 384)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_ic0uy"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 296, -32, 0, 0, 0, 0, 296, 144, 0, 0, 0, 0, 304, 160, 0, 0, 0, 0, 328, 184, 0, 0, 0, 0, 336, 184, 0, 0, 0, 0, 544, 184)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_k3n1d"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 296, -32, 0, 0, 0, 0, 296, 160, 0, 0, 0, 0, 288, 168, 0, 0, 0, 0, 64, 168)
+}
+point_count = 4
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_70uel")
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_udxuc")
+script = ExtResource("2_2u3nc")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("2_hiqwa")
+autoplay = true
+
+[node name="Level1" type="Node2D" parent="."]
+script = ExtResource("1_ic0uy")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Level1"]
+
+[node name="Control" type="Control" parent="Level1/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Timers" type="PanelContainer" parent="Level1/CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -56.0
+offset_right = 112.0
+offset_bottom = 56.0
+grow_horizontal = 2
+script = ExtResource("2_k3n1d")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Level1/CanvasLayer/Control/Timers"]
+layout_mode = 2
+alignment = 1
+
+[node name="Panel2" type="Panel" parent="Level1/CanvasLayer/Control/Timers/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Level1/CanvasLayer/Control/Timers/VBoxContainer/Panel2"]
+layout_mode = 0
+offset_right = 152.0
+offset_bottom = 24.0
+alignment = 1
+
+[node name="PassTime" type="Label" parent="Level1/CanvasLayer/Control/Timers/VBoxContainer/Panel2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("1_gbfbk")
+theme_override_font_sizes/font_size = 10
+text = "0.5 "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Level1/CanvasLayer/Control/Timers/VBoxContainer/Panel2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("1_gbfbk")
+theme_override_font_sizes/font_size = 8
+text = " Pass Time          "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Level1/CanvasLayer/Control/Timers/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Level1/CanvasLayer/Control/Timers/VBoxContainer/Panel"]
+layout_mode = 0
+offset_right = 152.0
+offset_bottom = 26.0
+alignment = 1
+
+[node name="AvgTime" type="Label" parent="Level1/CanvasLayer/Control/Timers/VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("1_gbfbk")
+theme_override_font_sizes/font_size = 10
+text = "--.--"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_wse8f")
+
+[node name="Label2" type="Label" parent="Level1/CanvasLayer/Control/Timers/VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("1_gbfbk")
+theme_override_font_sizes/font_size = 9
+text = "Avg Wait Time"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="Level1/CanvasLayer/Control/Timers"]
+one_shot = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Level1/CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ResetLevel" type="Button" parent="Level1/CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_gbfbk")
+theme_override_font_sizes/font_size = 10
+text = "Restart Level"
+script = ExtResource("2_ioo17")
+
+[node name="Pause" type="CheckButton" parent="Level1/CanvasLayer/Control/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_gbfbk")
+theme_override_font_sizes/font_size = 10
+text = "Pause"
+
+[node name="LevelFailed" type="PanelContainer" parent="Level1/CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.0
+offset_top = -52.0
+offset_right = 47.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gbfbk")
+script = ExtResource("3_gbfbk")
+
+[node name="Vbox" type="VBoxContainer" parent="Level1/CanvasLayer/Control/LevelFailed"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Level1/CanvasLayer/Control/LevelFailed/Vbox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_gbfbk")
+theme_override_font_sizes/font_size = 15
+text = "Traffic Jammed! Try Again?"
+
+[node name="Panel" type="Panel" parent="Level1/CanvasLayer/Control/LevelFailed/Vbox"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Level1/CanvasLayer/Control/LevelFailed/Vbox/Panel"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -19.0
+offset_right = 80.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_gbfbk")
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_ioo17")
+text = "Restart Level"
+
+[node name="PanelContainer" type="PanelContainer" parent="Level1/CanvasLayer/Control"]
+custom_minimum_size = Vector2(220, 360)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -180.0
+offset_bottom = 180.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wse8f")
+
+[node name="IntersectionController" parent="Level1/CanvasLayer/Control/PanelContainer" node_paths=PackedStringArray("lights") instance=ExtResource("4_036b0")]
+layout_mode = 2
+lights = {
+NodePath("../../../../NorthLight"): NodePath("../../../../NorthLight/NIArea"),
+NodePath("../../../../EastLight"): NodePath("../../../../EastLight/EIArea"),
+NodePath("../../../../SouthLight"): NodePath("../../../../SouthLight/SIArea"),
+NodePath("../../../../WestLight"): NodePath("../../../../WestLight/WIArea")
+}
+
+[node name="Roadway" type="TileMapLayer" parent="Level1"]
+z_index = -10
+tile_map_data = PackedByteArray("AAD/////AAABAAAAAAAAAAAAAAABAAAAAAAAAAEAAAABAAAAAAABAAEAAAABAAAAAAABAAIAAAABAAAAAAACAAMAAAABAAAAAAADAAMAAAABAAAAAAADAAQAAAABAAAAAAAEAAQAAAABAAAAAAAEAAUAAAADAAAAAAAFAAUAAAABAAEAAAAFAAYAAAABAAAAAAAGAAYAAAAAAAEAAAAHAAYAAAABAAAAAAAIAAYAAAABAAAAAAAJAAcAAAABAAAAAAD//wAAAAABAAAAAAD//wEAAAABAAAAAAD//wIAAAABAAAAAAD//wMAAAABAAAAAAD//wQAAAABAAAAAAD//wUAAAADAAAAAAD//wYAAAABAAAAAAD//wcAAAABAAAAAAD//wgAAAABAAAAAAD//wkAAAABAAAAAAD//woAAAABAAAAAAD//wsAAAABAAAAAAAAAP//AAABAAAAAAAAAAIAAAABAAAAAAAAAAMAAAABAAAAAAAAAAQAAAABAAAAAAAAAAUAAAADAAAAAAAAAAYAAAABAAAAAAAAAAcAAAABAAAAAAAAAAgAAAABAAAAAAAAAAkAAAABAAAAAAAAAAoAAAABAAAAAAAAAAsAAAABAAAAAAABAP//AAABAAAAAAABAAAAAAABAAAAAAABAAMAAAABAAAAAAABAAQAAAABAAAAAAABAAUAAAADAAAAAAABAAYAAAABAAAAAAABAAcAAAABAAAAAAABAAgAAAABAAAAAAABAAkAAAABAAAAAAABAAoAAAABAAAAAAABAAsAAAABAAAAAAACAP//AAABAAAAAAACAAAAAAABAAAAAAACAAEAAAABAAAAAAACAAIAAAABAAAAAAACAAQAAAABAAAAAAACAAUAAAADAAAAAAACAAYAAAABAAAAAAACAAcAAAABAAAAAAACAAgAAAABAAAAAAACAAkAAAABAAAAAAACAAoAAAABAAAAAAACAAsAAAABAAAAAAADAP//AAABAAAAAAADAAAAAAABAAAAAAADAAEAAAABAAAAAAADAAIAAAABAAAAAAADAAUAAAADAAAAAAADAAYAAAABAAAAAAADAAcAAAABAAAAAAADAAgAAAABAAAAAAADAAkAAAABAAAAAAADAAoAAAABAAAAAAADAAsAAAABAAAAAAAEAP//AAABAAAAAAAEAAAAAAABAAAAAAAEAAEAAAABAAAAAAAEAAIAAAABAAAAAAAEAAMAAAABAAAAAAAEAAYAAAABAAAAAAAEAAcAAAABAAAAAAAEAAgAAAABAAAAAAAEAAkAAAABAAAAAAAEAAoAAAABAAAAAAAEAAsAAAABAAAAAAAFAP//AAABAAAAAAAFAAAAAAABAAAAAAAFAAEAAAABAAAAAAAFAAIAAAABAAAAAAAFAAMAAAABAAAAAAAFAAQAAAABAAAAAAAFAAcAAAABAAAAAAAFAAgAAAABAAAAAAAFAAkAAAABAAAAAAAFAAoAAAABAAAAAAAFAAsAAAABAAAAAAAGAP//AAACAAAAAAAGAAAAAAACAAAAAAAGAAEAAAACAAAAAAAGAAIAAAACAAAAAAAGAAMAAAACAAAAAAAGAAQAAAACAAEAAAAGAAUAAAAAAAAAAAAGAAcAAAACAAAAAAAGAAgAAAACAAAAAAAGAAkAAAACAAAAAAAGAAoAAAACAAAAAAAGAAsAAAACAAAAAAAHAP//AAABAAAAAAAHAAAAAAABAAAAAAAHAAEAAAABAAAAAAAHAAIAAAABAAAAAAAHAAMAAAABAAAAAAAHAAQAAAABAAAAAAAHAAUAAAADAAEAAAAHAAcAAAABAAAAAAAHAAgAAAABAAAAAAAHAAkAAAABAAAAAAAHAAoAAAABAAAAAAAHAAsAAAABAAAAAAAIAP//AAABAAAAAAAIAAAAAAABAAAAAAAIAAEAAAABAAAAAAAIAAIAAAABAAAAAAAIAAMAAAABAAAAAAAIAAQAAAABAAAAAAAIAAUAAAADAAAAAAAIAAcAAAABAAAAAAAIAAgAAAABAAAAAAAIAAkAAAABAAAAAAAIAAoAAAABAAAAAAAIAAsAAAABAAAAAAAJAP//AAABAAAAAAAJAAAAAAABAAAAAAAJAAEAAAABAAAAAAAJAAIAAAABAAAAAAAJAAMAAAABAAAAAAAJAAQAAAABAAAAAAAJAAUAAAADAAAAAAAJAAYAAAABAAAAAAAJAAgAAAABAAAAAAAJAAkAAAABAAAAAAAJAAoAAAABAAAAAAAJAAsAAAABAAAAAAAKAP//AAABAAAAAAAKAAAAAAABAAAAAAAKAAEAAAABAAAAAAAKAAIAAAABAAAAAAAKAAMAAAABAAAAAAAKAAQAAAABAAAAAAAKAAUAAAADAAAAAAAKAAYAAAABAAAAAAAKAAcAAAABAAAAAAAKAAgAAAABAAAAAAAKAAkAAAABAAAAAAAKAAoAAAABAAAAAAAKAAsAAAABAAAAAAALAP//AAABAAAAAAALAAAAAAABAAAAAAALAAEAAAABAAAAAAALAAIAAAABAAAAAAALAAMAAAABAAAAAAALAAQAAAABAAAAAAALAAUAAAADAAAAAAALAAYAAAABAAAAAAALAAcAAAABAAAAAAALAAgAAAABAAAAAAALAAkAAAABAAAAAAALAAoAAAABAAAAAAALAAsAAAABAAAAAAAMAP//AAABAAAAAAAMAAAAAAABAAAAAAAMAAEAAAABAAAAAAAMAAIAAAABAAAAAAAMAAMAAAABAAAAAAAMAAQAAAABAAAAAAAMAAUAAAADAAAAAAAMAAYAAAABAAAAAAAMAAcAAAABAAAAAAAMAAgAAAABAAAAAAAMAAkAAAABAAAAAAAMAAoAAAABAAAAAAAMAAsAAAABAAAAAAANAAUAAAADAAAAAAANAP//AAABAAAAAAANAAAAAAABAAAAAAANAAEAAAABAAAAAAANAAMAAAABAAAAAAANAAIAAAABAAAAAAANAAQAAAABAAAAAAANAAYAAAABAAAAAAANAAcAAAABAAAAAAANAAgAAAABAAAAAAANAAkAAAABAAAAAAANAAoAAAABAAAAAAANAAsAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_tlwt5")
+
+[node name="SpawnerNorth" parent="Level1" node_paths=PackedStringArray("spawn_paths") instance=ExtResource("2_fj7yv")]
+spawn_interval = 2
+spawn_paths = [NodePath("../Routes/NorthLeftWest"), NodePath("../Routes/SouthLeftEast")]
+
+[node name="SpawnerWest" parent="Level1" node_paths=PackedStringArray("spawn_paths") instance=ExtResource("2_fj7yv")]
+spawn_paths = [NodePath("../Routes/WestLeftSouth"), NodePath("../Routes/EastLeftNorth")]
+
+[node name="Routes" type="Node2D" parent="Level1"]
+visible = false
+
+[node name="EastStraight" type="Path2D" parent="Level1/Routes"]
+visible = false
+curve = SubResource("Curve2D_tlwt5")
+
+[node name="EastLeftNorth" type="Path2D" parent="Level1/Routes"]
+visible = false
+curve = SubResource("Curve2D_aqk2v")
+
+[node name="EastRightSouth" type="Path2D" parent="Level1/Routes"]
+visible = false
+curve = SubResource("Curve2D_2o6r5")
+
+[node name="NorthStraight" type="Path2D" parent="Level1/Routes"]
+visible = false
+position = Vector2(-104, 0)
+curve = SubResource("Curve2D_fj7yv")
+
+[node name="NorthLeftWest" type="Path2D" parent="Level1/Routes"]
+visible = false
+position = Vector2(-96, 0)
+curve = SubResource("Curve2D_dwbse")
+
+[node name="NorthRightEast" type="Path2D" parent="Level1/Routes"]
+visible = false
+position = Vector2(-96, 0)
+curve = SubResource("Curve2D_036b0")
+
+[node name="WestStraight" type="Path2D" parent="Level1/Routes"]
+visible = false
+curve = SubResource("Curve2D_gbfbk")
+
+[node name="WestLeftSouth" type="Path2D" parent="Level1/Routes"]
+visible = false
+position = Vector2(-96, 0)
+curve = SubResource("Curve2D_pkg7o")
+
+[node name="WestRightNorth" type="Path2D" parent="Level1/Routes"]
+visible = false
+position = Vector2(-96, 0)
+curve = SubResource("Curve2D_ioo17")
+
+[node name="SouthStraight" type="Path2D" parent="Level1/Routes"]
+visible = false
+position = Vector2(-96, 0)
+curve = SubResource("Curve2D_wse8f")
+
+[node name="SouthLeftEast" type="Path2D" parent="Level1/Routes"]
+visible = false
+position = Vector2(-96, 0)
+curve = SubResource("Curve2D_ic0uy")
+
+[node name="SouthRightWest" type="Path2D" parent="Level1/Routes"]
+visible = false
+position = Vector2(-96, 0)
+curve = SubResource("Curve2D_k3n1d")
+
+[node name="SouthLight" parent="Level1" node_paths=PackedStringArray("area") instance=ExtResource("6_dwbse")]
+position = Vector2(208, 200)
+area = NodePath("SIArea")
+light_name = "South Light"
+
+[node name="SIArea" parent="Level1/SouthLight" instance=ExtResource("6_pkg7o")]
+position = Vector2(-8, -56)
+
+[node name="EastLight" parent="Level1" node_paths=PackedStringArray("area") instance=ExtResource("6_dwbse")]
+position = Vector2(232, 176)
+area = NodePath("EIArea")
+light_name = "East Light"
+
+[node name="EIArea" parent="Level1/EastLight" instance=ExtResource("6_pkg7o")]
+position = Vector2(-56, 8)
+
+[node name="NorthLight" parent="Level1" node_paths=PackedStringArray("area") instance=ExtResource("6_dwbse")]
+position = Vector2(208, 144)
+area = NodePath("NIArea")
+light_name = "North Light"
+
+[node name="NIArea" parent="Level1/NorthLight" instance=ExtResource("6_pkg7o")]
+position = Vector2(8, 64)
+
+[node name="WestLight" parent="Level1" node_paths=PackedStringArray("area") instance=ExtResource("6_dwbse")]
+position = Vector2(184, 176)
+area = NodePath("WIArea")
+light_name = "West Light"
+
+[node name="WIArea" parent="Level1/WestLight" instance=ExtResource("6_pkg7o")]
+position = Vector2(56, -8)
+
+[node name="FailLine" parent="Level1" instance=ExtResource("9_ioo17")]
+position = Vector2(208, -16)
+
+[node name="FailLine2" parent="Level1" instance=ExtResource("9_ioo17")]
+position = Vector2(-16, 176)
+
+[node name="FailLine3" parent="Level1" instance=ExtResource("9_ioo17")]
+position = Vector2(432, 176)
+
+[node name="FailLine4" parent="Level1" instance=ExtResource("9_ioo17")]
+position = Vector2(208, 376)
+
+[connection signal="game_won" from="Level1/CanvasLayer/Control/Timers" to="Level1" method="_on_game_won"]
+[connection signal="check_time" from="Level1/CanvasLayer/Control/Timers/VBoxContainer/Panel/HBoxContainer/AvgTime" to="Level1/CanvasLayer/Control/Timers" method="_on_check_time"]
+[connection signal="timeout" from="Level1/CanvasLayer/Control/Timers/Timer" to="Level1/CanvasLayer/Control/Timers" method="_on_timer_timeout"]
+[connection signal="pressed" from="Level1/CanvasLayer/Control/VBoxContainer/ResetLevel" to="." method="_on_reset_level_pressed"]
+[connection signal="toggled" from="Level1/CanvasLayer/Control/VBoxContainer/Pause" to="Level1" method="_on_pause_toggled"]
+[connection signal="pressed" from="Level1/CanvasLayer/Control/LevelFailed/Vbox/Panel/Button" to="." method="_on_reset_level_pressed"]

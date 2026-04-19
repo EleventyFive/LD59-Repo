@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl1yj064g42ju"]
+
+[ext_resource type="Script" uid="uid://dw6omqf0x60fb" path="res://gameobjects/_fail_line.gd" id="1_y3ay5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pjevo"]
+size = Vector2(29, 32)
+
+[node name="FailLine" type="Area2D"]
+script = ExtResource("1_y3ay5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pjevo")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

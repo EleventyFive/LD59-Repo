@@ -6,6 +6,7 @@ func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 
 #data is the original label
 func _drop_data(at_position: Vector2, data: Variant) -> void:
+	Event.play_ui_sound.emit()
 	
 	var new_label : LightLabel = light_label.instantiate()
 	new_label.text = data.text

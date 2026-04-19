@@ -1,14 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://blenttcf84m6l"]
+[gd_scene load_steps=7 format=3 uid="uid://blenttcf84m6l"]
 
 [ext_resource type="Script" uid="uid://bblw85tweuwjh" path="res://gameobjects/intersection/intersection_controls/_light_group.gd" id="1_phhmb"]
 [ext_resource type="Script" uid="uid://dlv8tmvqgthwo" path="res://gameobjects/intersection/intersection_controls/_light_group_lights.gd" id="2_45do0"]
 [ext_resource type="FontFile" uid="uid://w7ikvwo103m2" path="res://ui/tinypixel.ttf" id="3_xprev"]
+[ext_resource type="Script" uid="uid://bgffn7sfymo6k" path="res://gameobjects/intersection/intersection_controls/spin_box.gd" id="4_07k37"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xprev"]
+bg_color = Color(0.25565878, 0.2556588, 0.2556587, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.7455169, 0.6316957, 0.28110954, 1)
+border_blend = true
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
 
 [sub_resource type="Theme" id="Theme_07k37"]
 default_font = ExtResource("3_xprev")
 default_font_size = 10
 
 [node name="LightGroup" type="VBoxContainer"]
+process_mode = 3
 script = ExtResource("1_phhmb")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -16,9 +31,9 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(50, 20)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_xprev")
 
 [node name="GroupLights" type="VBoxContainer" parent="HBoxContainer/PanelContainer"]
 layout_mode = 2
@@ -33,6 +48,7 @@ theme = SubResource("Theme_07k37")
 max_value = 10.0
 rounded = true
 alignment = 1
+script = ExtResource("4_07k37")
 
 [node name="DeleteButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
@@ -40,7 +56,8 @@ size_flags_vertical = 4
 theme_override_colors/font_color = Color(1, 0.18039216, 0, 1)
 theme_override_fonts/font = ExtResource("3_xprev")
 theme_override_font_sizes/font_size = 5
-text = "Delete Group
+text = "Delete 
+Group
 "
 
 [node name="Timer" type="Timer" parent="."]
