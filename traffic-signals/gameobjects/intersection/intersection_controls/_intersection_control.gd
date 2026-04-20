@@ -3,7 +3,7 @@ class_name IntersectionControls
 const light_group = preload("uid://blenttcf84m6l")
 const light_label = preload("uid://c8ti3tgv5m4em")
 
-@export var lights : Dictionary[Light, Area2D]
+@export var lights : Array[Light]
 @onready var light_group_container: VBoxContainer = $PanelContainer/VBoxContainer/LightGroupContainer
 @onready var available_lights: GridContainer = $PanelContainer/VBoxContainer/PanelContainer/AvailableLights
 @onready var timer: Timer = $Timer

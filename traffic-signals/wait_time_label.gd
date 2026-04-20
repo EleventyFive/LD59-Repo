@@ -20,10 +20,10 @@ func _ready() -> void:
 func recieve_wait_time(time : float): #cars that are still waiting
 	wait_times.append(time)
 
-	if wait_times.size() > 100:
+	if wait_times.size() > 50:
 		wait_times.pop_front()
 		
-	if wait_times.size() > 10:
+	if wait_times.size() > 5:
 		current_wait_time = average_wait_time(wait_times)
 		average_and_display()
 		
