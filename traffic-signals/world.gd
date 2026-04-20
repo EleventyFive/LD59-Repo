@@ -4,7 +4,7 @@ const LEVEL_1 = preload("uid://dp1q0dxpkto4i")
 const LEVEL_2 = preload("uid://ycxaje4f2erp")
 const LEVEL_3 = preload("uid://dvdk20hiusc6m")
 
-@export var start_level : int 
+@export var start_level : int  = 1
 
 func _ready() -> void:
 	Event.next_level.connect(go_to_next_level)

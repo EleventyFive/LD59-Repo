@@ -366,6 +366,7 @@ text = "  -There is a pause button top left if you are
 
 [node name="PanelContainer3" type="PanelContainer" parent="CanvasLayer/Control"]
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

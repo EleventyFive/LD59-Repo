@@ -16,7 +16,6 @@ stream_2/stream = ExtResource("4_26xuy")
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_70uel")
-start_level = 2
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
